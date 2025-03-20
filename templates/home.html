@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Ticket Booking System{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to lakshmi vilas palace Ticket Booking System!</h1>
+    <p class="lead">Your one-stop solution for all your ticket booking needs.</p>
+    <P class="details">The Lakshmi Vilas Palace in Vadodara, Gujarat, is a grand Indo-Saracenic style palace built by Maharaja Sayajirao Gaekwad III in 1890, and is reputed to be the largest private dwelling ever built, four times the size of Buckingham Palace. </p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('book_ticket') }}" role="button">Book a Ticket</a>
+</div>
+
+{% endblock %}
