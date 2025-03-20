@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Explore Museum Items{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(to right, #019863, #00BFA5, #00E676);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 15px 0;
+        border-radius: 12px;
+        font-size: 36px;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .gallery-item {
+        text-align: center;
+        padding: 10px;
+        background: #F4EFE6;
+        border: 3px solid rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+        transform: scale(1.08);
+    }
+    .gallery-item h2 {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #019863;
+    }
+</style>
+
+<h1>Explore Museum Items</h1>
+
+<div class="gallery">
+    <div class="gallery-item">
+        <h2>Dinosaur Sculpture</h2>
+        <img src="/static/images/Dinosaur Sculpture.png" alt="Dinosaur Sculpture">
+    </div>
+    <div class="gallery-item">
+        <h2>Phoenix Statue</h2>
+        <img src="/static/images/Phoenix Statue.png" alt="Phoenix Statue">
+    </div>
+    <div class="gallery-item">
+        <h2>Wooden Bicycle</h2>
+        <img src="/static/images/Wooden Bicycle.jpg" alt="Wooden Bicycle">
+    </div>
+    <div class="gallery-item">
+        <h2>Dodo Bird (Extincted in 2003)</h2>
+        <img src="/static/images/Dodo Bird.png" alt="Dodo Bird">
+    </div>
+    <div class="gallery-item">
+        <h2>Black and White Blewder TV</h2>
+        <img src="/static/images/Black and White Blewder TV.jpg" alt="Blewder TV">
+    </div>
+    <div class="gallery-item">
+        <h2>Lion Skull Sculpture</h2>
+        <img src="/static/images/Lion Skull.png" alt="Lion Skull">
+    </div>
+    <div class="gallery-item">
+        <h2>Nefritis: King of Ancient Egypt</h2>
+        <img src="/static/images/Nefritis.jpg" alt="Nefritis">
+    </div>
+    <div class="gallery-item">
+        <h2>Extara Varex VX Camera</h2>
+        <img src="/static/images/VX Camera.jpg" alt="Varex VX Camera">
+    </div>
+    <div class="gallery-item">
+        <h2>Arrau Tortoise Skeleton</h2>
+        <img src="/static/images/Arrau Tortoise.jpg" alt="Arrau Tortoise">
+    </div>
+    <div class="gallery-item">
+        <h2>Amenemhat 3rd</h2>
+        <img src="/static/images/Amenemhat 3rd.jpg" alt="Amenemhat III">
+    </div>
+    <div class="gallery-item">
+        <h2>Egyptian Mummy Coffin</h2>
+        <img src="/static/images/Egyptian Mummy.jpg" alt="Egyptian Mummy Coffin">
+    </div>
+    <div class="gallery-item">
+        <h2>Daoist Immortal He Xiangu</h2>
+        <img src="/static/images/Daoist Immortal He Xiangu.png" alt="Daoist Immortal">
+    </div>
+    <div class="gallery-item">
+        <h2>Sculpture Bust Of Roza Loewenfeld</h2>
+        <img src="/static/images/Sculpture Bust Of Roza Loewenfeld.png" alt="Roza Loewenfeld">
+    </div>
+    <div class="gallery-item">
+        <h2>10th Century Goddess Durga Statue</h2>
+        <img src="/static/images/10th Century Goddess Durga.jpg" alt="Goddess Durga">
+    </div>
+</div>
+{% endblock %}
