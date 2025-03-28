@@ -153,34 +153,38 @@ def verify_otp():
 def login():
     if request.method == 'POST':
         from models import User  # Import User model
+        
+        # Get username and password from form input
         username = request.form['username']
         password = request.form['password']
+        
+        # Query database for user with the given username
         user = User.query.filter_by(username=username).first()
 
-        if user and user.check_password(password):  # Verify hashed password
-            session['user_id'] = user.id
-            return redirect(url_for('book_ticket'))
-        else:
-            flash("Invalid username or password.", "danger")
+        # Check if user exists and if the provided password is correct
+        # if user and user.check_password(password):  # Verify hashed password
+        #     session['user_id'] = user.id  # Store user ID in session
+        #     return redirect(url_for('book_ticket'))  # Redirect to booking page
+        # else:
+        #     flash("Invalid username or password.", "danger")  # Show error message
 
-    return render_template('login.html')    
+    return render_template('login.html')  # Render login page if request is GET
+   
 
 @app.route('/book_ticket', methods=['GET', 'POST'])
 def book_ticket():
     if request.method == 'POST':
-        from models import Ticket
-        age = int(request.form['age'])
-        if age < 18:
-            return "You must be 18 or older to book a ticket."
-        ticket = Ticket(
-            name=request.form['name'],
-            age=age,
-            email=request.form['email'],
-            user_id=session['user_id']
-        )
-        db.session.add(ticket)
-        db.session.commit()
-        return redirect(url_for('payment', ticket_id=ticket.id))
+        group_size = request.form.get('group_size')
+        if not group_size or int(group_size) < 1:
+            flash("⚠️ Please enter a valid number of visitors.", "danger")
+            return redirect(url_for('book_ticket'))
+
+        # Generate a dummy ticket_id (replace with database logic)
+        ticket_id = random.randint(1000, 9999)  # Example: Generate a random ticket ID
+
+        flash("✅ Ticket booked successfully!", "success")
+        return redirect(url_for('payment', ticket_id=ticket_id))  # Pass ticket_id
+
     return render_template('book_ticket.html')
 
 @app.route('/my_tickets')
@@ -197,12 +201,12 @@ def delete_ticket(ticket_id):
     db.session.commit()
     return redirect(url_for('my_tickets'))
 
-@app.route('/payment/<int:ticket_id>', methods=['GET', 'POST'])
-def payment(ticket_id):
+@app.route('/payment', methods=['GET', 'POST'])
+def payment():
     if request.method == 'POST':
         try:
             stripe.PaymentIntent.create(
-                amount=1000,  # amount in cents
+                amount=1000,
                 currency='usd',
                 payment_method=request.form['payment_method_id'],
                 confirmation_method='manual',
@@ -210,8 +214,8 @@ def payment(ticket_id):
             )
             return "Payment successful!"
         except Exception as e:
-            return f"An error occurred: {str(e)}", 400  # Better error handling
-    return render_template('payment.html', stripe_public_key=app.config['STRIPE_PUBLIC_KEY'], ticket_id=ticket_id)
+            return f"An error occurred: {str(e)}", 400
+    return render_template('payment.html', stripe_public_key=app.config['STRIPE_PUBLIC_KEY'])
 
 
 @app.route('/chatbot', methods=['GET', 'POST'])
